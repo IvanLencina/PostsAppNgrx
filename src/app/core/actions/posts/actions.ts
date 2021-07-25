@@ -73,6 +73,9 @@ export class DeletePostFailAction implements Action {
 }
 
 
+/**
+ * Export all Action Creators as a Type.
+ */
 export type PostAction =
   AddPostAction |
   AddPostSuccessAction |
