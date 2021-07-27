@@ -6,36 +6,36 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-# Explicacion
+# Explanation
 
 ## Actions
-En el archivo `actions.ts` sólo se encuentra la definición de los Actions types y los Action creators que son simplemente funciones que crean Acciones.
-En este archivo también se exportan los tipos de acciones disponibles.
+In the `actions.ts` file there is only the definition of the Actions types and the Action creators that are simply functions that create Actions.
+The types of actions available are also exported in this file.
 
 ## Reducer
-En el archivo `reducer.ts` se define el modelo de datos del estado para "Post", llamado PostState.
-Tambien se establece un valor inicial para PostState.
-Se crea un reducer llamado `PostsReducer`, el cual recibe el estado actualizado (se establece el initialState por defecto) y la Action disparada.
+The file `reducer.ts` defines the state data model for "Post", called `PostState`.
+An initial value is also set for PostState.
+A reducer called `PostsReducer` is created, which receives the updated state (the initialState is set by default) and the triggered Action.
 
-Dependiendo de que tipo de acción se haya emitido, este actualiza el `PostState`.
+Depending on what type of action has been issued, it updates the `PostState`.
 
-**NOTA**: Este reducer no es mas que una funcion pura. Por lo que sólo recibe el estado, el tipo de accion y devuelve un nuevo objeto para `PostState`.
+**NOTE**: This reducer is just a pure function. So it only receives the state, the action type and returns a new object for `PostState`.
 
 ## PostEffects (side effects)
-En el archivo `post.effects.ts` se encuentran los effects.
+In the file `post.effects.ts` are the effects.
 
-Estos effects, se encargan de suscribirse a actions del store, entonces se encarga de comparar que tipo de Action se emitió para realizar funcionalidad correspondiente.
-Por ejemplo: en el caso de que el tipo de accion emitida sea `<GetPostsAction>(PostActionTypes.GET_POSTS)`, este va a encargarse de llamar al metodo `getAll()` de `PostsService`. Si sale bien, emite una acción `new GetPostsSuccessAction(data)`, si sale mal emite `new GetPostsFailAction(error)` en forma de `Observable`.
+These effects are responsible for subscribing to actions in the store, then it is responsible for comparing what type of Action was dispatched to perform corresponding functionality.
+For example: in the case that the type of the dispatched action is `<GetPostsAction> (PostActionTypes.GET_POSTS)`, this will take care of calling the `getAll ()` method of `PostsService`. If it succeeds, it issues a `new GetPostsSuccessAction (data)` action, if it fails it emits `new GetPostsFailAction (error)` as an `Observable`.
 
-# Flujo
+# Flow
 
-Cuando la app inicializa, se renderizan los componentes AddPost y PostsComponent, el cual tiene el listado de componentes.
-Este ultimo, inyecta el store, definiendo que es del tipo `AppState`. 
-Luego selecciona diferentes propiedades del estado `PostState` que pertenece a AppState.
+When the app initializes, the AddPost and PostsComponent components are rendered, which has the list of components.
+The latter, injects the store, defining that it is of type `AppState`.
+Then select different properties of the `PostState` state that belongs to AppState.
 
-Al cargar, dispara una Action del tipo `GetPostsAction`.
-Esto desencadena en que:
-* El reducer recibe esta accion y actualiza el estado.
-* PostEffects, detecta el tipo de accion emitida, hace el fetch correspondiente y emite una accion `GetPostsSuccessAction(data)` o `GetPostsFailAction(error)` dependiendo lo que corresponda.
-* El reducer atrapa nuevamente la acción emitida y actualiza el estado.
-* Se actualiza la vista de `PostsComponent` ya que está suscripta a `PostState`.
+When loading, it triggers an Action of type `GetPostsAction`.
+This triggers in that:
+* The reducer receives this action and updates the state.
+* PostEffects, detects the type of action issued, makes the corresponding fetch and emits an action `GetPostsSuccessAction (data)` or `GetPostsFailAction (error)` depending on what corresponds.
+* The reducer catches the new dispatched action again and updates the state.
+* The view of `PostsComponent` is updated since it is subscribed to` PostState`.
