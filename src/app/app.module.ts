@@ -8,10 +8,16 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsReducer } from './core/reducers/posts/reducer';
+import { PostsComponent } from './posts/components/posts/posts.component';
+import { DeletePostComponent } from './posts/components/delete-post/delete-post.component';
+import { AddPostComponent } from './posts/components/add-post/add-post.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PostsComponent,
+    DeletePostComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
