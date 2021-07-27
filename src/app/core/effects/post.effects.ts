@@ -16,7 +16,6 @@ import {
         AddPostFailAction
      } from '../actions/posts/actions';
 import { PostService } from '../services/post/post.service';
-import Post from '../models/post-model';
 
 @Injectable()
 export class PostEffects {
@@ -25,7 +24,7 @@ export class PostEffects {
     .pipe(
       ofType<GetPostsAction>(PostActionTypes.GET_POSTS),
       mergeMap(
-        () => this.service.getAll()
+        () => this.postService.getAll()
           .pipe(
             map(data => {
                 return new GetPostsSuccessAction(data)
@@ -39,7 +38,7 @@ export class PostEffects {
     .pipe(
       ofType<DeletePostAction>(PostActionTypes.DELETE_POST),
       mergeMap(
-        (data) => this.service.delete(data.payload)
+        (data) => this.postService.delete(data.payload)
           .pipe(
             map(data2 => {
                 return new DeletePostSuccessAction(data.payload)
@@ -53,7 +52,7 @@ export class PostEffects {
     .pipe(
       ofType<AddPostAction>(PostActionTypes.ADD_POST),
       mergeMap(
-        (data) => this.service.add(data.payload)
+        (data) => this.postService.add(data.payload)
           .pipe(
             map(data2 => {
                 return new AddPostSuccessAction(data.payload)
@@ -65,6 +64,6 @@ export class PostEffects {
 
   constructor(
     private actions$: Actions,
-    private service: PostService
+    private postService: PostService
   ) { }
 }
