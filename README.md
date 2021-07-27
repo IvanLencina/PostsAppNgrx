@@ -38,4 +38,4 @@ This triggers in that:
 * The reducer receives this action and updates the state.
 * PostEffects, detects the type of action issued, makes the corresponding fetch and emits an action `GetPostsSuccessAction (data)` or `GetPostsFailAction (error)` depending on what corresponds.
 * The reducer catches the new dispatched action again and updates the state.
-* The view of `PostsComponent` is updated since it is subscribed to` PostState`.
+* The view of `PostsComponent` is updated since it is subscribed to `PostState`.
