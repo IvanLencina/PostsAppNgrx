@@ -11,6 +11,7 @@ import { PostsReducer } from './core/reducers/posts/reducer';
 import { PostsComponent } from './posts/components/posts/posts.component';
 import { DeletePostComponent } from './posts/components/delete-post/delete-post.component';
 import { AddPostComponent } from './posts/components/add-post/add-post.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { AddPostComponent } from './posts/components/add-post/add-post.component
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({
       post: PostsReducer
